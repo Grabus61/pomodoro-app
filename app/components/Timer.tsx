@@ -51,6 +51,7 @@ export default function Timer() {
         else{
             playTimerEnd();
             resetTimer();
+            moveNextState();
         }
     }
 
@@ -68,6 +69,22 @@ export default function Timer() {
     const toggleTimer = () => {
         setIsRunning(!isRunning);
         playClick();
+    }
+
+    const moveNextState = () => {
+        setIsRunning(false);
+        
+        switch (activeState) {
+            case "pomodoro":
+                switchMode("shortBreak");
+                break;
+            case "shortBreak":
+                switchMode("pomodoro");
+                break;
+            case "longBreak":
+                switchMode("pomodoro");
+                break;
+        }
     }
 
     return (
